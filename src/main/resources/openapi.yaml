@@ -1,0 +1,226 @@
+openapi: 3.0.1
+info:
+  title: API BS PokeAPI v1
+  description: This is a sample representation of the UNICA Customer Information API that
+    The applications use it to manage the information of the pokemon's.
+    Pokemon queries detail their basic information such as Type, Weight, and Ability List.
+    The Api also exposes the pokemon's queries by Description and Evolutions.
+
+  version: 1.0.0
+servers:
+- url: https://zomelivillanueva/
+tags:
+- name: pokemonList
+paths:
+  /pokemon:
+    get:
+      tags:
+      - pokemonList
+      summary: Pokemon's queries expose their basic information, such as Type, Weight, and Ability List.
+      operationId: getPokemon
+      parameters:
+      - name: UNICA-ServiceId
+        in: header
+        description: If this API is used via a platform acting as a common entry point
+          to different OBs, this identifier is used to route the request to the corresponding
+          OB environment
+        schema:
+          type: string
+      - name: UNICA-Application
+        in: header
+        description: Identifier for the system originating the request
+        schema:
+          type: string
+      - name: UNICA-PID
+        in: header
+        description: Unique identifier for the process or execution flow
+        schema:
+          type: string
+      - name: UNICA-User
+        in: header
+        description: Identifies the user when the request is received from a trusted
+          application and no end user authorization token is used but just an application
+          token
+        schema:
+          type: string
+      - name: Ocp-Apim-Subscription-Key
+        in: header
+        description: Subscription key
+        schema:
+          type: string
+      - name: X-IBM-Client-Id
+        in: header
+        description: Client ID required for authentication
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Including the proof of access (using OAuth2.0 security model)
+          to guarantee that the consumer has privileges to access the entity database
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: To limit the maximum number of results to be included in the
+          response. Use together with offset for pagination.
+        example: 5
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: To apply an offset in the results to be included in the response.
+          Use together with limit for pagination
+        example: 1
+        schema:
+          type: integer
+      responses:
+        200:
+          description:  successful response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PokeApiResponse'
+        400:
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionType'
+        404:
+          description: Not Found Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionType'
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionType'
+        503:
+          description: Service Unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionType'
+
+components:
+  schemas:
+    PokeApiResponse:
+      title: PokeApiResponse
+      type: object
+      properties:
+        count:
+          type: integer
+          description: count.
+          example: 1154
+        next:
+          type: String
+          description: next.
+          example: "https://pokeapi.co/api/v2/pokemon?offset=6&limit=5"
+        previous:
+          type: String
+          description: previous.
+          example: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1"
+        results:
+          type: array
+          description: List of PokeApiNamedApiResource.
+          items:
+            $ref: '#/components/schemas/PokeApiPokemon'
+
+    PokeApiPokemon:
+      title: PokeApiPokemon
+      type: object
+      properties:
+        name:
+          type: String
+          description: name Pokemon.
+          example: ivysaur
+        url:
+          type: String
+          description: url Pokemon.
+          example: "https://pokeapi.co/api/v2/pokemon/2/"
+        types:
+          type: array
+          description: List of types Pokemon.
+          items:
+            $ref: '#/components/schemas/PokeApiType'
+        abilities:
+          type: array
+          description: List of abilities Pokemon.
+          items:
+            $ref: '#/components/schemas/PokeApiAbilities'
+        weight:
+          type: String
+          description: weight Pokemon.
+
+    PokeApiType:
+      title: PokeApiType
+      type: object
+      properties:
+        name:
+          type: String
+          description: name type.
+          example: "grass"
+        url:
+          type: String
+          description: url type.
+          example: "https://pokeapi.co/api/v2/type/12/"
+
+    PokeApiAbilities:
+      title: PokeApiAbilities
+      type: object
+      properties:
+        name:
+          type: String
+          description: name abilities.
+          example: "overgrow"
+        description:
+          type: String
+          description: description abilities.
+          example: "Potencia los ataques de tipo\nPlanta en un apuro."
+        url:
+          type: String
+          description: url abilities.
+          example: "https://pokeapi.co/api/v2/ability/65/"
+
+    ExceptionType:
+      required:
+        - exceptionId
+        - exceptionText
+      type: object
+      properties:
+        exceptionId:
+          type: string
+          description: Identifier of the exception
+        exceptionText:
+          type: string
+          description: Human readable description of the associated error, including
+            some specific variables
+        moreInfo:
+          type: string
+          description: A URI where more information about the exception is provided
+        userMessage:
+          type: string
+          description: A message that can be shown to the user of the Application
+            implementing the API Client
+        exceptionDetails:
+          type: array
+          description: List of error details
+          items:
+            $ref: '#/components/schemas/ExceptionDetailsType'
+
+    ExceptionDetailsType:
+      required:
+      - component
+      type: object
+      properties:
+        component:
+          type: string
+          description: Component in which the error occurs
+        description:
+          type: string
+          description: Description of the error detail
