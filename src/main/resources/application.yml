@@ -1,0 +1,15 @@
+
+#spring.cache.jcache.config=classpath:ehcache.xml
+
+server:
+  port: ${PORT:9004}
+
+spring:
+  jackson:
+    default-property-inclusion: NON_NULL
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+  main:
+    allow-circular-references: 'true'
+ 

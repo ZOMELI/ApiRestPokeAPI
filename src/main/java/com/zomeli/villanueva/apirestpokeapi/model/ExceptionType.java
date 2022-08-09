@@ -15,11 +15,9 @@ import java.util.Objects;
  * ExceptionType
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
-@Builder
-@Data
-public class ExceptionType   {
+public class ExceptionType {
   @JsonProperty("exceptionId")
-  private String exceptionId;
+  private int exceptionId;
 
   @JsonProperty("exceptionText")
   private String exceptionText;
@@ -34,24 +32,24 @@ public class ExceptionType   {
   @Valid
   private List<ExceptionDetailsType> exceptionDetails = null;
 
-  public ExceptionType exceptionId(String exceptionId) {
+  public ExceptionType exceptionId(int exceptionId) {
     this.exceptionId = exceptionId;
     return this;
   }
 
   /**
    * Identifier of the exception
+   *
    * @return exceptionId
-  */
+   */
   @ApiModelProperty(required = true, value = "Identifier of the exception")
   @NotNull
 
-
-  public String getExceptionId() {
+  public int getExceptionId() {
     return exceptionId;
   }
 
-  public void setExceptionId(String exceptionId) {
+  public void setExceptionId(int exceptionId) {
     this.exceptionId = exceptionId;
   }
 
@@ -62,11 +60,11 @@ public class ExceptionType   {
 
   /**
    * Human readable description of the associated error, including some specific variables
+   *
    * @return exceptionText
-  */
+   */
   @ApiModelProperty(required = true, value = "Human readable description of the associated error, including some specific variables")
   @NotNull
-
 
   public String getExceptionText() {
     return exceptionText;
@@ -83,10 +81,10 @@ public class ExceptionType   {
 
   /**
    * A URI where more information about the exception is provided
+   *
    * @return moreInfo
-  */
+   */
   @ApiModelProperty(value = "A URI where more information about the exception is provided")
-
 
   public String getMoreInfo() {
     return moreInfo;
@@ -103,10 +101,10 @@ public class ExceptionType   {
 
   /**
    * A message that can be shown to the user of the Application implementing the API Client
+   *
    * @return userMessage
-  */
+   */
   @ApiModelProperty(value = "A message that can be shown to the user of the Application implementing the API Client")
-
 
   public String getUserMessage() {
     return userMessage;
@@ -131,8 +129,9 @@ public class ExceptionType   {
 
   /**
    * List of error details
+   *
    * @return exceptionDetails
-  */
+   */
   @ApiModelProperty(value = "List of error details")
 
   @Valid
@@ -145,7 +144,6 @@ public class ExceptionType   {
     this.exceptionDetails = exceptionDetails;
   }
 
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -155,11 +153,10 @@ public class ExceptionType   {
       return false;
     }
     ExceptionType exceptionType = (ExceptionType) o;
-    return Objects.equals(this.exceptionId, exceptionType.exceptionId) &&
-        Objects.equals(this.exceptionText, exceptionType.exceptionText) &&
-        Objects.equals(this.moreInfo, exceptionType.moreInfo) &&
-        Objects.equals(this.userMessage, exceptionType.userMessage) &&
-        Objects.equals(this.exceptionDetails, exceptionType.exceptionDetails);
+    return Objects.equals(this.exceptionId, exceptionType.exceptionId) && Objects
+            .equals(this.exceptionText, exceptionType.exceptionText) && Objects.equals(this.moreInfo, exceptionType.moreInfo) && Objects
+            .equals(this.userMessage, exceptionType.userMessage) && Objects
+            .equals(this.exceptionDetails, exceptionType.exceptionDetails);
   }
 
   @Override
@@ -171,7 +168,7 @@ public class ExceptionType   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ExceptionType {\n");
-    
+
     sb.append("    exceptionId: ").append(toIndentedString(exceptionId)).append("\n");
     sb.append("    exceptionText: ").append(toIndentedString(exceptionText)).append("\n");
     sb.append("    moreInfo: ").append(toIndentedString(moreInfo)).append("\n");

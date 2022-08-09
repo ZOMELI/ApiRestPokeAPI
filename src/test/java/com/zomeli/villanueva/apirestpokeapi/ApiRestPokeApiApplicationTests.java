@@ -1,6 +1,6 @@
 package com.zomeli.villanueva.apirestpokeapi;
 
-import com.zomeli.villanueva.apirestpokeapi.api.PokeApiNamedResourceList;
+import com.zomeli.villanueva.apirestpokeapi.model.pokeapi.PokeApiEvolutionChain;
 import com.zomeli.villanueva.apirestpokeapi.proxy.contract.ServiceHttpClientPokeApi;
 import io.reactivex.Single;
 import org.junit.jupiter.api.DisplayName;
@@ -29,9 +29,14 @@ public class ApiRestPokeApiApplicationTests {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
+
         service = retrofit.create(ServiceHttpClientPokeApi.class);
 
-        Single<Response<PokeApiNamedResourceList>> retrofitCall = service.list(5,0);
+//        Single<Response<PokeApiNamedResourceList>> retrofitCall = service.list(5,0);
+
+//        Single<PokeApiPokemon> retrofitCall = service.getPokemon("8");
+
+        Single<Response<PokeApiEvolutionChain>> retrofitCall = service.getEvolution("10");
 
         retrofitCall.subscribe(m -> System.out.println(m.body()));
         System.out.println(retrofitCall);

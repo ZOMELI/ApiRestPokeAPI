@@ -2,8 +2,6 @@ package com.zomeli.villanueva.apirestpokeapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
-import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -12,9 +10,7 @@ import java.util.Objects;
  * ExceptionDetailsType
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
-@Builder
-@Data
-public class ExceptionDetailsType   {
+public class ExceptionDetailsType {
   @JsonProperty("component")
   private String component;
 
@@ -28,11 +24,11 @@ public class ExceptionDetailsType   {
 
   /**
    * Component in which the error occurs
+   *
    * @return component
-  */
+   */
   @ApiModelProperty(required = true, value = "Component in which the error occurs")
   @NotNull
-
 
   public String getComponent() {
     return component;
@@ -49,10 +45,10 @@ public class ExceptionDetailsType   {
 
   /**
    * Description of the error detail
+   *
    * @return description
-  */
+   */
   @ApiModelProperty(value = "Description of the error detail")
-
 
   public String getDescription() {
     return description;
@@ -61,7 +57,6 @@ public class ExceptionDetailsType   {
   public void setDescription(String description) {
     this.description = description;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -72,8 +67,8 @@ public class ExceptionDetailsType   {
       return false;
     }
     ExceptionDetailsType exceptionDetailsType = (ExceptionDetailsType) o;
-    return Objects.equals(this.component, exceptionDetailsType.component) &&
-        Objects.equals(this.description, exceptionDetailsType.description);
+    return Objects.equals(this.component, exceptionDetailsType.component) && Objects
+            .equals(this.description, exceptionDetailsType.description);
   }
 
   @Override
@@ -85,7 +80,7 @@ public class ExceptionDetailsType   {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ExceptionDetailsType {\n");
-    
+
     sb.append("    component: ").append(toIndentedString(component)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("}");
